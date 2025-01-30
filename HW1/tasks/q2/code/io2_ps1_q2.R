@@ -4,7 +4,7 @@ library(tidyr)
 library(xtable)
 
 # Read in the dataset
-df <- read.csv("ps1_ex2.csv")
+df <- read.csv("../input/ps1_ex2.csv")
 names(df) <- c("market","product","s","p","x","z")
 
 #----------------------------------------------------------------------------#
@@ -47,7 +47,7 @@ iv_table <- data.frame(
 iv_latex_table <- xtable(iv_table, 
                          caption = "IV Regression Results: Estimating Alpha and Beta",
                          label = "tab:iv_results")
-print(iv_latex_table, type = "latex", include.rownames = FALSE, file = "iv_results.tex")
+print(iv_latex_table, type = "latex", include.rownames = FALSE, file = "../output/iv_results.tex")
 
 #----------------------------------------------------------------------------#
 # 2. Compute own- and cross-price elasticities
@@ -94,7 +94,7 @@ dimnames(E_avg) <- list(
 E_table <- xtable(E_avg, 
                   caption="Average Own- and Cross-Price Elasticities (6x6)",
                   label="tab:elasticities")
-print(E_table, type="latex", include.rownames=TRUE, file="elasticities.tex")
+print(E_table, type="latex", include.rownames=TRUE, file="../output/elasticities.tex")
 
 #----------------------------------------------------------------------------#
 # 3. Recover Marginal Costs: Single-Product Nash-Bertrand
@@ -118,7 +118,7 @@ print(avg_mc)
 mc_table <- xtable(avg_mc, 
                    caption="Average Marginal Costs, Prices, and Shares by Product",
                    label="tab:mc")
-print(mc_table, type="latex", include.rownames=FALSE, file = "prices_and_shares.tex")
+print(mc_table, type="latex", include.rownames=FALSE, file = "../output/prices_and_shares.tex")
 
 #----------------------------------------------------------------------------#
 # 4. Counterfactual: Remove product 1, solve new equilibrium among 2-6
@@ -204,7 +204,7 @@ print(avg_cf)
 cf_table <- xtable(avg_cf,
                    caption="Counterfactual Average Prices and Shares (products 2-6)",
                    label="tab:cf")
-print(cf_table, type="latex", include.rownames=FALSE, file="prices_and_shares_cf.tex")
+print(cf_table, type="latex", include.rownames=FALSE, file="../output/prices_and_shares_cf.tex")
 
 #----------------------------------------------------------------------------#
 # 5. Profit changes & Consumer Surplus changes
@@ -242,7 +242,7 @@ print(profit_summary)
 profit_table <- xtable(profit_summary,
                        caption="Average Baseline vs. Counterfactual Profits by Product",
                        label="tab:profit")
-print(profit_table, type="latex", include.rownames=FALSE, file="profits.tex")
+print(profit_table, type="latex", include.rownames=FALSE, file="../output/profits.tex")
 
 # (c) Consumer Surplus changes
 #     CS = (1/alpha)*ln(1 + sum_j exp(delta_j))
@@ -289,4 +289,4 @@ cs_summary_table <- data.frame(
 cs_xt <- xtable(cs_summary_table,
                 caption="Average Change in Consumer Surplus (per capita)",
                 label="tab:cs")
-print(cs_xt, type="latex", include.rownames=FALSE, file="consumer_surplus.tex")
+print(cs_xt, type="latex", include.rownames=FALSE, file="../output/consumer_surplus.tex")
