@@ -1,0 +1,352 @@
+\section*{Exercise 1}
+\prob{1}{
+Let $X_i$ with $i=1, \ldots, N$ be a sequence of independent type 1 extreme value random variables with location parameter $\mu_i$ and scale parameter $\sigma>0\left(\mathrm{~T} 1 \mathrm{EV}\left(\mu_i, \sigma\right)\right)$. The c.d.f. is given by:
+
+\begin{align*}
+\operatorname{Pr}\left\{X_i \leq x \mid \mu_i, \sigma\right\}=\exp \left(-\exp \left(-\frac{x-\mu_i}{\sigma}\right)\right)
+\end{align*}
+
+
+Derive the distribution of $Y=\max _i\left\{X_i\right\}$.
+}
+By independence,
+\begin{align*}
+    P\{Y\leq y\} &= P\{\max_i\{X_i\}\leq y\} \\
+               &= P\{X_1\leq y, X_2\leq y, \ldots, X_N\leq y\} \\
+               &= \prod_{i=1}^N P\{X_i\leq y\} 
+\end{align*}
+Therefore, the distribution of $Y$ is
+\begin{align*}
+    F_Y(y) = P\{Y\leq y\} &= \prod_{i=1}^N P\{X_i\leq y\} \\
+               &= \prod_{i=1}^N \exp\left(-\exp\left(-\frac{y-\mu_i}{\sigma}\right)\right) \\
+               &= \exp\left(-\sum_{i=1}^N \exp\left(-\frac{y-\mu_i}{\sigma}\right)\right)
+\end{align*}
+
+\prob{2}{
+Let $X$ and $Y$ be two independent T1EV random variables with location parameters $\mu_x$ and $\mu_y$ respectively and common scale parameter $\sigma>0$. Derive the distribution of $X-Y$.
+}
+
+The difference of two independent Gumbel (T1EV) random variables with the same scale follows a logistic distribution,
+namely
+\begin{align*}
+Z=X-Y \quad \Longrightarrow \quad Z \sim \operatorname{Logistic}\left(\mu_X-\mu_Y, \sigma\right)
+\end{align*}
+or
+\begin{align*}
+F_{X-Y}(z)=\frac{1}{1+\exp \left(-\frac{z-\left(\mu_X-\mu_Y\right)}{\sigma}\right)}
+\end{align*}
+If needed, we could solve directly by computing
+\begin{align*}
+    F_Z(z)=\operatorname{Pr}\{X-Y \leq z\}=\int_{-\infty}^{\infty} \operatorname{Pr}\{X \leq z+y\} f_Y(y) d y
+\end{align*}
+using
+\begin{align*}
+\begin{aligned}
+& F_X(x)=\operatorname{Pr}\{X \leq x\}=\exp \left[-\exp \left(-\frac{x-\mu_X}{\sigma}\right)\right] \\
+& f_Y(y)=\frac{1}{\sigma} \exp \left[-\frac{y-\mu_Y}{\sigma}\right] \exp \left[-\exp \left(-\frac{y-\mu_Y}{\sigma}\right)\right]
+\end{aligned}
+\end{align*}
+
+\prob{3}{
+Consider an individual who has to choose one product among $N$ possible alternatives. The utility derived from alternative $j$ is given by:
+
+\begin{align*}
+u_j=\mu_j+\epsilon_j
+\end{align*}
+
+where $\mu_j$ is non-random and $\epsilon_j$ are independent and identically distributed T1EV $(0,1)$. Derive the probability that alternative $j$ is chosen.
+}
+
+The individual chooses the alternative that maximizes utility. Therefore, we want
+\begin{align*}
+    \operatorname{Pr}\{u_j \geq \max _{k} u_k \} &=
+    \operatorname{Pr}\{u_j \geq u_k \text { for all } k \} \\
+     &= \operatorname{Pr}\{\mu_j+\epsilon_j \geq \mu_k+\epsilon_k \text { for all } k \} \\
+     &= \operatorname{Pr}\{\epsilon_k-\epsilon_j \leq \mu_j-\mu_k \text { for all } k \} \\
+\end{align*}
+The standard result here is
+\begin{align*}
+    \operatorname{Pr}\{u_j \geq \max _{k} u_k \} &=
+    \frac{\exp \left(\mu_j\right)}{\sum_{k=1}^N \exp \left(\mu_k\right)}
+\end{align*}
+Again, if necessary, we could solve the following integral to get this result
+\begin{align*}
+    \operatorname{Pr}\{u_j \geq u_k \text { for all } k \} 
+=\int_{-\infty}^{+\infty} \operatorname{Pr}\left(\epsilon_k \leq \epsilon_j+\left[\mu_j-\mu_k\right] \forall k \neq j \mid \epsilon_j=t\right) f_{\epsilon_j}(t) d t \\
+=\int_{-\infty}^{+\infty}\left[\prod_{k \neq j} F_{\epsilon_k}\left(t+\left(\mu_j-\mu_k\right)\right)\right] f_{\epsilon_j}(t) d t
+\end{align*}
+where the product follows by independence and we have
+\begin{align*}
+F_{\epsilon_k}(x)=\exp [-\exp (-x)]
+\end{align*}
+
+
+\prob{4}{
+Consider a market with $J$ products indexed by $j=1, \ldots, J$, an outside good denoted by $j=0$ and a large number of consumers indexed by $i \in \mathcal{I}$ each of whom only buys one of the products. Consumer $i$ 's indirect utility from consuming product $j$ is given by:
+
+\begin{align*}
+\begin{gathered}
+u_{i j}=\alpha\left(y_i-p_j\right)+\epsilon_{i j} \text { for } j=1, \ldots, J \\
+u_{i 0}=\alpha y_i+\epsilon_{i 0} \text { for } j=0
+\end{gathered}
+\end{align*}
+
+where $p_j$ is the price of product $j, y_i$ is consumer $i$ 's income, and $\epsilon_{i j}$ is an idiosyncratic taste shock that makes products horizontally differentiated.
+
+(a) Assume $\epsilon_{i j}$ are i.i.d T1EV $(0,1)$. Denote consumer $i$ 's individual choice probability of selecting product $j$ as $s_j(i)$. Derive $s_j(i)$ and compute $\frac{\partial s_j(i)}{\partial y_i}$. Interpret your results.
+
+(b) Assume $\epsilon_{i j}$ are i.i.d $\operatorname{T1EV}(0,1)$. Derive $s_j$ (the market share of product $j$ ) and compute own and cross-price elasticities. Are the latter reasonable? Explain.
+
+(c) Assume that $\epsilon_{i j}=\beta_i x_j$ where $x_j$ represents a non-random product characteristic that consumers value, and $\beta_i$ represents an idiosyncratic taste shock for that same characteristic. Moreover, assume that $x_j>0, x_0=0$.
+
+(i) Assume that $\beta_i \equiv \beta$ for all $i$. Derive product $j$ market share, $s_j$. Interpret your results.
+
+(ii) Assume that $\beta_i$ are i.i.d Uniform $[0, \bar{\beta}]$ with $\bar{\beta}$ sufficiently large. Derive product $j$ market share, $s_j$, and compute own and cross-price elasticities. Are the latter reasonable? Explain and compare with your findings in points (b) above. (For simplicity assume that $\frac{p_i-p_j}{x_i-x_j} \geq \frac{p_j-p_k}{x_j-x_k}$ whenever $x_i \geq x_j \geq x_k$ )
+
+(d) Assume that $\epsilon_{i j}=\beta_i x_j+v_{i j}$ where $x_j$ represents a non-random product characteristic, $\beta_i$ represents an idiosyncratic taste shock for that same characteristic and $v_{i j}$ are i.i.d $\mathrm{T} 1 \mathrm{EV}(0,1)$. Moreover, assume that $\beta_i$ are i.i.d with generic c.d.f $F(\cdot)$. Derive product $j$ 's market share and compute own and cross-price elasticities. Explain and compare with your findings in point (b) above.
+
+(e) Assume, as in point (a) above, that $\epsilon_{i j}$ are i.i.d T1EV( 0,1 ). Moreover, suppose we want to measure welfare at given prices $\left(p_1, \ldots, p_J\right)$ as
+
+\begin{align*}
+W \equiv \mathbb{E}\left[\max _{j=0, \ldots, J} u_{i j}\right]
+\end{align*}
+
+(i) Rewrite $W$ as a function of the market share of the outside option $s_0$.
+
+(ii) Suppose that a new product $J+1$ is introduced in the market. What happens to $W$ ? Interpret your results.
+
+}
+
+(a)
+As in (3), consumers will choose the product that maximizes their utility. Therefore, we have
+\begin{align*}
+s_j(i)=\operatorname{Pr}\left[u_{i j} \geq u_{i k} \text { for all } k \neq j\right]
+\end{align*}
+We can directly use the result from (3) here, so
+\begin{align*}
+s_j(i)&=\frac{\exp \left(\alpha\left(y_i-p_j\right)\right)}{\sum_{k=0}^J \exp \left(\alpha\left(y_i-p_{k}\right)\right)} \\
+\end{align*}
+where if we have $p_0=0$, the denominator is
+\begin{align*}
+\exp \left(\alpha y_i\right)\left[1+\sum_{k=1}^J \exp \left[-\alpha p_{k}\right]\right]
+\end{align*}
+and therefore
+\begin{align*}
+s_j(i)=\frac{\exp \left(-\alpha p_j\right)}{1+\sum_{k=1}^J \exp \left(-\alpha p_k\right)}
+\end{align*}
+Thus, since the y's cancel out, we have
+\begin{align*}
+\frac{\partial s_j(i)}{\partial y_i}=0 \quad \text { for all } j
+\end{align*}
+An increase in income will not change the probability of choosing any product,
+as it impacts the utility of all products equally.
+
+(b)
+The market share of product $j$ is simply the average of the individual choice probabilities, and since we do not have dependence on $i$, this is the same as the individual choice probability.
+\begin{align*}
+    s_j=\frac{\exp \left(-\alpha p_j\right)}{1+\sum_{k=1}^J \exp \left(-\alpha p_k\right)}
+\end{align*}
+Let's use the following notation when we take derivatives for the elasticities:
+\begin{align*}
+s_j=\frac{e^{-\alpha p_j}}{D}, \quad \text { where } \quad D=1+\sum_{\ell=1}^J e^{-\alpha p_{\ell}}
+\end{align*}
+Since 
+\begin{align*}
+\ln s_j=-\alpha p_j-\ln D
+\end{align*}
+we have 
+\begin{align*}
+\frac{\partial s_j}{\partial p_j}=s_j \frac{\partial}{\partial p_j}\left[\ln s_j\right]=s_j\left[-\alpha-\frac{\partial}{\partial p_j} \ln D\right]
+\end{align*}
+Then 
+\begin{align*}
+\frac{\partial}{\partial p_i} \ln D=\frac{1}{D} \frac{\partial D}{\partial p_i}=\frac{1}{D}\left[-\alpha e^{-\alpha p_j}\right]=-\alpha \frac{e^{-\alpha p_j}}{D}=-\alpha s_j
+\end{align*}
+so
+\begin{align*}
+\frac{\partial s_j}{\partial p_j}=s_j \alpha\left(s_j-1\right)=-\alpha s_j\left[1-s_j\right]
+\end{align*}
+Therefore,
+\begin{align*}
+\eta_{j j}=\left[\frac{\partial s_j}{\partial p_j}\right] \frac{p_j}{s_j}=-\alpha p_j\left[1-s_j\right]
+\end{align*}
+As expected, this tells us that a higher price lowers the share.
+Taking the same approach for the cross-price elasticities, we have
+\begin{align*}
+\frac{\partial}{\partial p_k}\left[\ln s_j\right]=-\frac{\partial}{\partial p_k} \ln D=-\frac{1}{D}\left[-\alpha e^{-\alpha p_k}\right]=\alpha \frac{e^{-\alpha p_k}}{D}=\alpha s_k
+\end{align*}
+Thus,
+\begin{align*}
+\frac{\partial s_j}{\partial p_k}=s_j\left[\alpha s_k\right]=\alpha s_j s_k
+\end{align*}
+and
+\begin{align*}
+\eta_{j k}=\left[\frac{\partial s_j}{\partial p_k}\right] \frac{p_k}{s_j}=\alpha s_k p_k
+\end{align*}
+This also makes sense. An increase in the price of other products will increase the share of the product in question, as they are substitutes.
+It also depends only on shares and prices of the other product, so when a given product has a price change, all other products respond in the same way.
+This is a feature of IIA, I think.
+
+(c)
+Now we transition to a model where there are taste shocks. 
+
+(i) If there is no heterogeneity ($\beta_i=\beta$), then all consumers will pick the same product. Namely, 
+\begin{align*}
+s_j= \begin{cases}1 & \text { if } j \text { is the max of } u_{i j}  \\ 0 & \text { otherwise } \end{cases}
+\end{align*}
+where we are picking the product that maximizes 
+\begin{align*}
+-\alpha p_j+\beta x_j
+\end{align*}
+If all are less than 0, then the outside option is chosen.
+All consumers have the same taste shock, so they all choose the same product.
+
+(ii)
+Define indirect utility as
+\begin{align*}
+v_j(\beta)=-\alpha p_j+\beta x_j, \quad j \geq 1, \quad \text { and } \quad v_0(\beta)=0
+\end{align*}
+The consumer picks product $j$ if $v_j(\beta) \geq v_k(\beta)$ for all $k$.
+For the outside option, we have
+\begin{align*}
+v_j(\beta)=-\alpha p_j+\beta x_j \geq 0 \quad \Longrightarrow \quad \beta \geq \frac{\alpha p_j}{x_j}
+\end{align*}
+For the other products, we have
+\begin{align*}
+-\alpha p_j+\beta x_j \geq-\alpha p_k+\beta x_k, \quad \Longrightarrow \quad \beta\left(x_j-x_k\right) \geq \alpha\left(p_j-p_k\right)
+\end{align*}
+Then for $[0, \bar{\beta}]$, with uniform distribution and our simplifying assumption, one product will be chosen in each interval, where the cutoffs are
+\begin{align*}
+\frac{\alpha\left(p_j-p_k\right)}{x_j-x_k}
+\end{align*}
+\textcolor{red}{I'm not sure if I can write this more formally, come back to this.} 
+For the elasticities, increasing $p$ lowers the utility and thus shrinks the region where the product is chosen. Thus the own-price elasticity is negative.
+For the cross-price elasticities, increasing $p$ of the other good shrinks the region where it is chosen, thus increasing the region of other products. This gives a positive sign, as expected.
+Now, cross-price elasticities will differ however, unlike in the previous case. 
+
+(d)
+This is a mix of the previous two cases. 
+\begin{align*}
+u_{i j}=\underbrace{\alpha\left(y_i-p_j\right)}_{\text {mean utility }}+\underbrace{\beta_i x_j}_{\text {random coefficient part }}+\underbrace{v_{i j}}_{\text {T1EV error }}
+\end{align*}
+Conditional on $\beta_i$, the consumer solves the first T1EV problem, 
+\begin{align*}
+s_j(i \mid \beta)=\frac{\exp \left[\alpha\left(y_i-p_j\right)+\beta x_j\right]}{\sum_{k=0}^J \exp \left[\alpha\left(y_i-p_k\right)+\beta x_k\right]}
+\end{align*}
+so
+\begin{align*}
+s_j(\beta)=\frac{\exp \left[-\alpha p_j+\beta x_j\right]}{\sum_{k=0}^J \exp \left[-\alpha p_k+\beta x_k\right]}
+\end{align*}
+(again taking $p_0=0$ and $x_0=0$).
+To get unconditional shares, we would have to integrate
+\begin{align*}
+s_j=\int s_j(\beta) d F(\beta)=\int \frac{\exp \left[-\alpha p_j+\beta x_j\right]}{\sum_{k=0}^J \exp \left[-\alpha p_k+\beta x_k\right]} f(\beta) d \beta
+\end{align*}
+Similar, we will have conditional elasticities in the same form as above, so
+\begin{align*}
+\eta_{j j}(\beta)=\frac{\partial s_j(\beta)}{\partial p_j} \frac{p_j}{s_j(\beta)}=-\alpha p_j\left[1-s_j(\beta)\right]
+\end{align*}
+and
+\begin{align*}
+\eta_{j k}(\beta)=\frac{\partial s_j(\beta)}{\partial p_k} \frac{p_k}{s_j(\beta)}=\alpha p_k s_k(\beta)
+\end{align*}
+We would need to integrate over $\beta$ to get the unconditional elasticities.
+Specifically, we will get something that looks like the expectation of the conditional elasticity weighted by the conditional share.
+As we move from (b) to (d), we increase in complexity but gain in realism.
+
+(e)
+
+(i)
+
+We measure welfare at the given prices $\left\{p_j\right\}$ by
+
+\begin{align*}
+W \equiv \mathbb{E}\left[\max _{j=0, \ldots, J} u_{i j}\right]=\mathbb{E}\left[\max _j\left(v_j+\epsilon_{i j}\right)\right] .
+\end{align*}
+
+
+A well-known property of i.i.d. T1EV $(0,1)$ errors is that
+
+\begin{align*}
+\mathbb{E}\left[\max _j\left(v_j+\epsilon_{i j}\right)\right]=\gamma+\ln \left(\sum_{k=0}^J e^{v_k}\right),
+\end{align*}
+
+Hence
+
+\begin{align*}
+W=\gamma+\ln \left(1+\sum_{k=1}^J e^{v_k}\right)
+\end{align*}
+
+because $v_0=0$ implies $e^{v_0}=1$.
+
+
+Recall
+
+\begin{align*}
+s_0=\frac{1}{1+\sum_{k=1}^J e^{v_k}}
+\end{align*}
+
+
+Hence
+
+\begin{align*}
+1+\sum_{k=1}^J e^{v_k}=\frac{1}{s_0} .
+\end{align*}
+
+
+Therefore,
+
+\begin{align*}
+\ln \left(1+\sum_{k=1}^J e^{v_k}\right)=\ln \left(\frac{1}{s_0}\right)=-\ln \left[s_0\right] .
+\end{align*}
+
+
+Thus,
+
+\begin{align*}
+W=\gamma-\ln \left[s_0\right]
+\end{align*}
+
+(ii)
+
+Now suppose we add a new product $j=J+1$ into the choice set, with deterministic utility $v_{J+1}$. In discrete choice theory with i.i.d. Gumbel errors, it is a standard result that:
+
+\begin{align*}
+\max _{j=0, \ldots, J, J+1}\left[v_j+\epsilon_{i j}\right] \geq \max _{j=0, \ldots, J}\left[v_j+\epsilon_{i j}\right]
+\end{align*}
+
+
+Hence,
+
+\begin{align*}
+\mathbb{E}\left[\max _{j=0, \ldots, J, J+1}\left(v_j+\epsilon_{i j}\right)\right] \geq \mathbb{E}\left[\max _{j=0, \ldots, J}\left(v_j+\epsilon_{i j}\right)\right]
+\end{align*}
+
+
+Thus, if we denote the new welfare with product $J+1$ as
+
+\begin{align*}
+W^{(\text {new })}=\mathbb{E}\left[\max _{j=0, \ldots, J+1} u_{i j}\right]
+\end{align*}
+
+then
+
+\begin{align*}
+W^{(\text {new })} \geq W
+\end{align*}
+
+
+In fact, with i.i.d. T1EV $(0,1)$, the new expected maximum utility is
+
+\begin{align*}
+W^{(\text {new })}=\gamma+\ln \left(1+\sum_{k=1}^J e^{v_k}+e^{v_{J+1}}\right)
+\end{align*}
+
+and obviously
+
+\begin{align*}
+1+\sum_{k=1}^J e^{v_k}+e^{v_{J+1}} \geq 1+\sum_{k=1}^J e^{v_k}
+\end{align*}
+
+
+Hence $W^{\text {(new) }} \geq W$. In other words, adding a new alternative cannot reduce the expected maximum utility (as expected).
