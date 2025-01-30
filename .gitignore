@@ -1,0 +1,4 @@
+.DS_Store
+*.fdb_latexmk
+*.log
+*.out
