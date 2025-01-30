@@ -2,3 +2,6 @@
 *.fdb_latexmk
 *.log
 *.out
+*.aux
+*.fls
+.Rhistory
